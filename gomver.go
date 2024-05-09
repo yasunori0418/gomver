@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -12,10 +11,6 @@ func main() {
 	app := &cli.App{
 		Name:        "gomver",
 		Description: "Controll semantic vertion.",
-		Action: func(cCtx *cli.Context) error {
-			fmt.Println("Hello friend!")
-			return nil
-		},
 	}
 
 	if err := app.Run(os.Args); err != nil {
