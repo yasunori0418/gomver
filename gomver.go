@@ -30,6 +30,65 @@ func main() {
 					return nil
 				},
 			},
+			{
+				Name:    "increment",
+				Aliases: []string{"inc"},
+				Usage:   "Increment the version value.",
+				Subcommands: []*cli.Command{
+					{
+						Name: "major",
+						Usage: `
+							Produces the next major version.
+							Sets patch to 0.
+							Sets minor to 0.
+							Increments major number.
+							Unsets metadata.
+							Unsets prerelease status.`,
+						Action: func(cCtx *cli.Context) error {
+							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							if err != nil {
+								return fmt.Errorf("Wrong semantic version: %w", err)
+							}
+							fmt.Println(version.IncMajor().String())
+							return nil
+						},
+					},
+					{
+						Name: "minor",
+						Usage: `
+							Produces the next minor version.
+							Sets patch to 0.
+							Increments minor number.
+							Unsets metadata.
+							Unsets prerelease status.`,
+						Action: func(cCtx *cli.Context) error {
+							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							if err != nil {
+								return fmt.Errorf("Wrong semantic version: %w", err)
+							}
+							fmt.Println(version.IncMinor().String())
+							return nil
+						},
+					},
+					{
+						Name: "patch",
+						Usage: `
+						Produces the next patch version.
+						If the current version does not have prerelease/metadata information,
+						it unsets metadata and prerelease values, increments patch number.
+						If the current version has any of prerelease or metadata information,
+						it unsets both values and keeps current patch value`,
+						Action: func(cCtx *cli.Context) error {
+							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							if err != nil {
+								return fmt.Errorf("Wrong semantic version: %w", err)
+							}
+							fmt.Println(version.IncPatch().String())
+							return nil
+						},
+					},
+				},
+			},
 		},
 	}
 
