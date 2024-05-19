@@ -89,6 +89,25 @@ func main() {
 					},
 				},
 			},
+			{
+				Name:    "prerelease",
+				Aliases: []string{"pre"},
+				Usage: `
+				Defines the prerelease value.
+				Value must not include the required 'hyphen(-)' prefix.`,
+				Action: func(cCtx *cli.Context) error {
+					version, err := semver.NewVersion(cCtx.Args().Get(0))
+					if err != nil {
+						return fmt.Errorf("Wrong semantic version: %w", err)
+					}
+					preVersion, err := version.SetPrerelease(cCtx.Args().Get(1))
+					if err != nil {
+						return fmt.Errorf("Wrong semantic version: %w", err)
+					}
+					fmt.Println(preVersion)
+					return nil
+				},
+			},
 		},
 	}
 
