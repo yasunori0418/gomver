@@ -17,16 +17,7 @@ func main() {
 				Name:  "show",
 				Usage: "Check if the entered value is semver and display details.",
 				Action: func(cCtx *cli.Context) error {
-					version, err := semver.NewVersion(cCtx.Args().Get(0))
-					if err != nil {
-						return fmt.Errorf("Wrong semantic version: %w", err)
-					}
-					fmt.Printf("inputed version: %+v\n", version.Original())
-					fmt.Printf("Major value in version: %+v\n", version.Major())
-					fmt.Printf("Minor value in version: %+v\n", version.Minor())
-					fmt.Printf("Patch value in version: %+v\n", version.Patch())
-					fmt.Printf("Prerelease value in version: %+v\n", version.Prerelease())
-					fmt.Printf("Metadata value in version: %+v\n", version.Metadata())
+					Show(cCtx.Args().Get(0))
 					return nil
 				},
 			},
