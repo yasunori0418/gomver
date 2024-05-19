@@ -14,8 +14,8 @@ func main() {
 		Description: "Controll semantic vertion.",
 		Commands: []*cli.Command{
 			{
-				Name:    "show",
-				Usage:   "Check if the entered value is semver and display details.",
+				Name:  "show",
+				Usage: "Check if the entered value is semver and display details.",
 				Action: func(cCtx *cli.Context) error {
 					version, err := semver.NewVersion(cCtx.Args().Get(0))
 					if err != nil {
