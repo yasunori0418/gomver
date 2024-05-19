@@ -73,11 +73,11 @@ func main() {
 					{
 						Name: "patch",
 						Usage: `
-						Produces the next patch version.
-						If the current version does not have prerelease/metadata information,
-						it unsets metadata and prerelease values, increments patch number.
-						If the current version has any of prerelease or metadata information,
-						it unsets both values and keeps current patch value`,
+							Produces the next patch version.
+							If the current version does not have prerelease/metadata information,
+							it unsets metadata and prerelease values, increments patch number.
+							If the current version has any of prerelease or metadata information,
+							it unsets both values and keeps current patch value`,
 						Action: func(cCtx *cli.Context) error {
 							version, err := semver.NewVersion(cCtx.Args().Get(0))
 							if err != nil {
@@ -93,8 +93,8 @@ func main() {
 				Name:    "prerelease",
 				Aliases: []string{"pre"},
 				Usage: `
-				Defines the prerelease value.
-				Value must not include the required 'hyphen(-)' prefix.`,
+					Defines the prerelease value.
+					Value must not include the required 'hyphen(-)' prefix.`,
 				Action: func(cCtx *cli.Context) error {
 					version, err := semver.NewVersion(cCtx.Args().Get(0))
 					if err != nil {
