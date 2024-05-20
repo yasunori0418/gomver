@@ -17,7 +17,7 @@ func main() {
 				Name:  "show",
 				Usage: "Check if the entered value is semver and display details.",
 				Action: func(cCtx *cli.Context) error {
-					Show(cCtx.Args().Get(0))
+					Show(cCtx.Args().First())
 					return nil
 				},
 			},
