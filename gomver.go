@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/Masterminds/semver/v3"
 	"github.com/urfave/cli/v2"
+	"github.com/yasunori0418/gomver/increment"
 	"log"
 	"os"
 )
@@ -36,11 +37,11 @@ func main() {
 							Unsets metadata.
 							Unsets prerelease status.`,
 						Action: func(cCtx *cli.Context) error {
-							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							v, err := increment.Major(cCtx.Args().First())
 							if err != nil {
 								return fmt.Errorf("Wrong semantic version: %w", err)
 							}
-							fmt.Println(version.IncMajor().String())
+							fmt.Println(v)
 							return nil
 						},
 					},
@@ -53,11 +54,11 @@ func main() {
 							Unsets metadata.
 							Unsets prerelease status.`,
 						Action: func(cCtx *cli.Context) error {
-							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							v, err := increment.Minor(cCtx.Args().First())
 							if err != nil {
 								return fmt.Errorf("Wrong semantic version: %w", err)
 							}
-							fmt.Println(version.IncMinor().String())
+							fmt.Println(v)
 							return nil
 						},
 					},
@@ -70,11 +71,11 @@ func main() {
 							If the current version has any of prerelease or metadata information,
 							it unsets both values and keeps current patch value`,
 						Action: func(cCtx *cli.Context) error {
-							version, err := semver.NewVersion(cCtx.Args().Get(0))
+							v, err := increment.Patch(cCtx.Args().First())
 							if err != nil {
 								return fmt.Errorf("Wrong semantic version: %w", err)
 							}
-							fmt.Println(version.IncPatch().String())
+							fmt.Println(v)
 							return nil
 						},
 					},
