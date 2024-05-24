@@ -87,11 +87,24 @@ func main() {
 			{
 				Name:    "prerelease",
 				Aliases: []string{"pre"},
-				Usage: `
-					Defines the prerelease value.
-					Value must not include the required 'hyphen(-)' prefix.`,
+				Usage: `Defines the prerelease value.
+				Value must not include the required 'hyphen(-)' prefix.`,
 				Action: func(cCtx *cli.Context) error {
 					v, err := cmd.PreRelease(cCtx.Args().Get(0), cCtx.Args().Get(1))
+					if err != nil {
+						return fmt.Errorf("Wrong semantic version: %w", err)
+					}
+					fmt.Println(v)
+					return nil
+				},
+			},
+			{
+				Name:    "metadata",
+				Aliases: []string{"meta"},
+				Usage: `Defines metadata value.
+				Value must not include the required 'plus(+)' prefix.`,
+				Action: func(cCtx *cli.Context) error {
+					v, err := cmd.Metadata(cCtx.Args().Get(0), cCtx.Args().Get(1))
 					if err != nil {
 						return fmt.Errorf("Wrong semantic version: %w", err)
 					}
