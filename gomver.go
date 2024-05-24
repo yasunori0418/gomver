@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/Masterminds/semver/v3"
 	"github.com/urfave/cli/v2"
 	"github.com/yasunori0418/gomver/cmd"
 	"github.com/yasunori0418/gomver/cmd/increment"
@@ -92,15 +91,11 @@ func main() {
 					Defines the prerelease value.
 					Value must not include the required 'hyphen(-)' prefix.`,
 				Action: func(cCtx *cli.Context) error {
-					version, err := semver.NewVersion(cCtx.Args().Get(0))
+					v, err := cmd.PreRelease(cCtx.Args().Get(0), cCtx.Args().Get(1))
 					if err != nil {
 						return fmt.Errorf("Wrong semantic version: %w", err)
 					}
-					preVersion, err := version.SetPrerelease(cCtx.Args().Get(1))
-					if err != nil {
-						return fmt.Errorf("Wrong semantic version: %w", err)
-					}
-					fmt.Println(preVersion)
+					fmt.Println(v)
 					return nil
 				},
 			},
