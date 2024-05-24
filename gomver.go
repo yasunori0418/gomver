@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"github.com/Masterminds/semver/v3"
 	"github.com/urfave/cli/v2"
-	"github.com/yasunori0418/gomver/increment"
+	"github.com/yasunori0418/gomver/cmd"
+	"github.com/yasunori0418/gomver/cmd/increment"
 	"log"
 	"os"
 )
@@ -18,7 +19,10 @@ func main() {
 				Name:  "show",
 				Usage: "Check if the entered value is semver and display details.",
 				Action: func(cCtx *cli.Context) error {
-					Show(cCtx.Args().First())
+					err := cmd.Show(cCtx.Args().First())
+					if err != nil {
+						return fmt.Errorf("Wrong semantic version: %w", err)
+					}
 					return nil
 				},
 			},
